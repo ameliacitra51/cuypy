@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tebak Goa Cuypy</title>
+</head>
+<body style="font-family: Arial, sans-serif; text-align: center;">
+    <h1>Selamat Datang di Game Tebak Goa Cuypy!</h1>
+    <hr style="border: 1px solid #000; width: 50%;">
+    <h3>Hai, {{ nama_kamu }}! Coba tebak di mana Cuypy bersembunyi.</h3>
+    <h4>Goa yang tersedia:</h4>
+    <pre>
+      |_| |_| |_| |_| |_|
+    </pre>
+
+    <form method="POST">
+        {% if not nama_kamu %}
+            <label for="nama_kamu">Masukkan nama kamu:</label>
+            <input type="text" id="nama_kamu" name="nama_kamu" required><br><br>
+        {% endif %}
+
+        <label for="pilihan">Pilih di goa nomor berapa yang berada Cuypy? (1-5):</label>
+        <input type="number" id="pilihan" name="pilihan" min="1" max="5" required>
+        <br><br>
+
+        {% if pilihan_kamu %}
+            <p>Anda memilih goa nomor {{ pilihan_kamu }}</p>
+            <label for="yakin">Apakah kamu yakin dengan pilihanmu? (yes/no):</label>
+            <input type="text" id="yakin" name="yakin" required>
+        {% endif %}
+
+        <br><br>
+        <button type="submit">Tebak</button>
+    </form>
+
+    {% if hasil %}
+        <hr style="border: 1px solid #000; width: 50%;">
+        <h2>{{ hasil }}</h2>
+    {% endif %}
+
+    <hr style="border: 1px solid #000; width: 50%;">
+    <h3>Ingin bermain lagi?</h3>
+    <a href="{{ url_for('tebak_goa') }}">Klik di sini untuk bermain lagi!</a>
+</body>
+</html>
